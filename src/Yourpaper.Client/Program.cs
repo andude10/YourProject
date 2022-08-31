@@ -1,4 +1,3 @@
-using CleanArchitecture.Infrastructure.Persistence;
 using Yourpaper.Application;
 using Yourpaper.Client;
 using Yourpaper.Infrastructure;
@@ -9,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
-builder.Services.AddWebUIServices();
+builder.Services.AddWebUiServices();
 
 var app = builder.Build();
 
@@ -20,12 +19,11 @@ if (app.Environment.IsDevelopment())
     app.UseMigrationsEndPoint();
 
     // Initialise and seed database
-    using (var scope = app.Services.CreateScope())
-    {
-        var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
-        await initialiser.InitialiseAsync();
-        await initialiser.SeedAsync();
-    }
+    using var scope = app.Services.CreateScope();
+    
+    var initializer = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
+    await initializer.InitialiseAsync();
+    await initializer.SeedAsync();
 }
 else
 {

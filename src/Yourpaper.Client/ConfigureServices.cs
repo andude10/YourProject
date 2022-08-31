@@ -1,5 +1,4 @@
-﻿using CleanArchitecture.Infrastructure.Persistence;
-using FluentValidation.AspNetCore;
+﻿using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using NSwag;
 using NSwag.Generation.Processors.Security;
@@ -12,7 +11,7 @@ namespace Yourpaper.Client;
 
 public static class ConfigureServices
 {
-    public static IServiceCollection AddWebUIServices(this IServiceCollection services)
+    public static IServiceCollection AddWebUiServices(this IServiceCollection services)
     {
         services.AddDatabaseDeveloperPageExceptionFilter();
 

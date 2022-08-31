@@ -5,10 +5,6 @@ namespace Yourpaper.Domain.ValueObjects;
 
 public class Colour : ValueObject
 {
-    static Colour()
-    {
-    }
-
     private Colour()
     {
     }
