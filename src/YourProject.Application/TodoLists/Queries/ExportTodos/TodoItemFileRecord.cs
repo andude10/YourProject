@@ -1,0 +1,11 @@
+﻿using YourProject.Application.Common.Mappings;
+using YourProject.Domain.Models;
+
+namespace YourProject.Application.TodoLists.Queries.ExportTodos;
+
+public class TodoItemRecord : IMapFrom<TodoItem>
+{
+    public string? Title { get; set; }
+
+    public bool Done { get; set; }
+}
