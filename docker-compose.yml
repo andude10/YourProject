@@ -5,11 +5,16 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: DockerfileDebug
     ports:
-      - "8080:80"
+      - "8080:5100"
+      - "8081:5101"
+      - "44447:44447"
+      - "4567:4567"
     depends_on:
       - db
+    volumes:
+      - ./src:/app
   
   db:
     image: "mcr.microsoft.com/mssql/server:2022-latest"

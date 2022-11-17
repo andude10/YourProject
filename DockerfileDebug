@@ -1,0 +1,16 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /build
+
+# Setup Angular (frontend)
+RUN curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
+RUN bash nodesource_setup.sh
+RUN apt install nodejs
+RUN npm install -g @angular/cli
+
+# Generate developer certificate 
+RUN dotnet dev-certs https --trust
+
+WORKDIR /app
+# Use native linux file polling for better performance
+ENV DOTNET_USE_POLLING_FILE_WATCHER 1
+ENTRYPOINT dotnet run --project YourProject.WebClient/YourProject.WebClient.csproj --urls "http://0.0.0.0:5100;https://0.0.0.0:5101"
