@@ -4,8 +4,8 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <IsPackable>true</IsPackable>
-        <SpaRoot>ClientApp\</SpaRoot>
-        <SpaProxyServerUrl>https://localhost:44447</SpaProxyServerUrl>
+        <SpaRoot>ClientApp</SpaRoot>
+        <SpaProxyServerUrl>https://0.0.0.0:44447</SpaProxyServerUrl>
         <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
         <ImplicitUsings>enable</ImplicitUsings>
         <PackageId>YourProject.WebClient</PackageId>

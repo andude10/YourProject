@@ -2,6 +2,7 @@
 using Duende.IdentityServer.EntityFramework.Options;
 using MediatR;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using YourProject.Application.Common.Interfaces;
@@ -12,7 +13,7 @@ using YourProject.Infrastructure.Persistence.Interceptors;
 
 namespace YourProject.Infrastructure.Persistence;
 
-public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, IApplicationDbContext
+public class ApplicationDbContext : CustomApiAuthorizationDbContext<ApplicationUser, ApplicationRole, Guid>, IApplicationDbContext
 {
     private readonly IMediator _mediator;
     private readonly AuditableEntitySaveChangesInterceptor _auditableEntitySaveChangesInterceptor;
@@ -27,8 +28,6 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
         _mediator = mediator;
         _auditableEntitySaveChangesInterceptor = auditableEntitySaveChangesInterceptor;
     }
-
-    public DbSet<ApplicationUser> ApplicationUsers => Set<ApplicationUser>();
 
     public DbSet<Project> Projects => Set<Project>();
     

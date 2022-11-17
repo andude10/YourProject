@@ -2,7 +2,7 @@
 
 namespace YourProject.Domain.Models;
 
-public class ApplicationUser : IdentityUser
+public class ApplicationUser : IdentityUser<Guid>
 {
     public IList<Project> Projects { get; private set; } = new List<Project>();
 

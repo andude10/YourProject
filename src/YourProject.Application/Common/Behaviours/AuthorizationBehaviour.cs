@@ -44,12 +44,12 @@ public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRe
 
     private async Task ProcessPolicyBasedAuthorization(List<AuthorizeAttribute> authorizeAttributesWithPolicies)
     {
-        if (_currentUserService.UserId is null)
+        if (_currentUserService.UserId is not { } userId)
             return;
 
         foreach (var policy in authorizeAttributesWithPolicies.Select(a => a.Policy))
         {
-            var authorized = await _identityService.AuthorizeAsync(_currentUserService.UserId, policy);
+            var authorized = await _identityService.AuthorizeAsync(userId, policy);
 
             if (!authorized) throw new ForbiddenAccessException();
         }
@@ -59,13 +59,13 @@ public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRe
     {
         var authorized = false;
 
-        if (_currentUserService.UserId is null)
+        if (_currentUserService.UserId is not { } userId)
             return;
 
         foreach (var roles in authorizeAttributesWithRoles.Select(a => a.Roles.Split(',')))
         foreach (var role in roles)
         {
-            var isInRole = await _identityService.IsInRoleAsync(_currentUserService.UserId, role.Trim());
+            var isInRole = await _identityService.IsInRoleAsync(userId, role.Trim());
 
             if (!isInRole) continue;
 

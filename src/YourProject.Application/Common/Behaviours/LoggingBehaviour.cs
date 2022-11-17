@@ -21,10 +21,10 @@ public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest> where T
     public async Task Process(TRequest request, CancellationToken cancellationToken)
     {
         var requestName = typeof(TRequest).Name;
-        var userId = _currentUserService.UserId ?? string.Empty;
+        var userId = _currentUserService.UserId ?? Guid.Empty;
         var userName = string.Empty;
 
-        if (!string.IsNullOrEmpty(userId)) userName = await _identityService.GetUserNameAsync(userId);
+        if (!string.IsNullOrEmpty(userId.ToString())) userName = await _identityService.GetUserNameAsync(userId);
 
         _logger.LogInformation("YourProject Server request: {Name} {@UserId} {@UserName} {@Request}",
             requestName, userId, userName, request);

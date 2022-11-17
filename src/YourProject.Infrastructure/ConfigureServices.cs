@@ -37,7 +37,7 @@ public static class ConfigureServices
 
         services
             .AddDefaultIdentity<ApplicationUser>()
-            .AddRoles<IdentityRole>()
+            .AddRoles<ApplicationRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
         services.AddIdentityServer()
